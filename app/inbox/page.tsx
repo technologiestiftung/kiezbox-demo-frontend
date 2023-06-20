@@ -9,35 +9,35 @@ const emergencyObjectDummies: EmergencyObject[] = [
     address_2: "Apt 4",
     name: "John Doe",
     incident: "Fire",
-    affected: "Residents",
+    affected: "5 Residents",
   },
   {
     address_1: "456 Elm St",
     address_2: undefined,
     name: "Jane Smith",
     incident: "Nightmare",
-    affected: "Neighborhood",
+    affected: "The whole Neighborhood",
   },
   {
     address_1: "789 Oak Ave",
     address_2: undefined,
     name: "Sam Johnson",
     incident: "Earthquake",
-    affected: "City",
+    affected: "Downtown City",
   },
   {
     address_1: "555 Maple Ln",
     address_2: undefined,
     name: "Sarah Davis",
     incident: "Hurricane",
-    affected: "Coastal Area",
+    affected: "Only Me",
   },
   {
     address_1: "777 Pine Rd",
     address_2: undefined,
     name: "Michael Wilson",
     incident: "Tornado",
-    affected: "Town",
+    affected: "About 20 people",
   },
   {
     address_1: "999 Cedar Blvd",
@@ -50,8 +50,26 @@ const emergencyObjectDummies: EmergencyObject[] = [
 
 const Page = () => {
   const [messages, setMessages] = useState<EmergencyObject[]>([]);
+
+  const fetchMessages = async () => {
+    const skip = 0;
+    const limit = 10;
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/messages/?skip=${skip}&limit=${limit}}`
+    );
+    if (!response.ok)
+      throw new Error(`Something went wrong" ${response.statusText}`);
+    else {
+      const data = await response.json();
+      console.log("SUCCESS", data);
+      setMessages(data);
+    }
+  };
+
   useEffect(() => {
     console.log("fetching messages");
+    fetchMessages();
+
     //establish web socket
     //fetch messages
     return () => {

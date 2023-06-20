@@ -25,10 +25,23 @@ export default function Home() {
   const [emergencyObject, emergencyObjectSet] = useState<EmergencyObject>(
     initialEmergencyObject
   );
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("submit", emergencyObject);
-    //api call here
+    const emergencyPostObject = {
+      name: emergencyObject.name,
+      address: emergencyObject.address_1 + "," + emergencyObject.address_2,
+      problem: emergencyObject.incident,
+      number_affected_ppl: emergencyObject.affected,
+    };
+    const res = await fetch("http://127.0.0.1:8000/api/messages/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emergencyPostObject),
+    });
+    console.log(res);
     //reset form
   };
 
@@ -40,10 +53,13 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-3xl items-start justify-start font-mono text-sm flex flex-col gap-4">
+      <div className="z-10 w-full max-w-3xl items-center justify-start font-mono text-sm flex flex-col gap-4">
         <h1 className="text-xl">Kiezbox Demo</h1>
         <p>Fill out this form to send an emergency call</p>
-        <form className="w-full" onSubmit={(e) => submitHandler(e)}>
+        <form
+          className="w-full flex flex-col items-center"
+          onSubmit={(e) => submitHandler(e)}
+        >
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
             <Label htmlFor="address_1">
               <strong>Address Field 1</strong>
@@ -96,9 +112,9 @@ export default function Home() {
               <strong>Who/how many are affected</strong>
             </Label>
             <Input
-              type="text"
+              type="number"
               id="affected"
-              placeholder="Me and 5 more people"
+              placeholder="Estimation of people affected"
               onChange={(e) => changeHandler(e)}
             />
           </div>
