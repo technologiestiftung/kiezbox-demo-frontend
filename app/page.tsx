@@ -27,13 +27,13 @@ export default function Home() {
   );
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("submit", emergencyObject);
     const emergencyPostObject = {
       name: emergencyObject.name,
       address: emergencyObject.address_1 + "," + emergencyObject.address_2,
       problem: emergencyObject.incident,
       number_affected_ppl: emergencyObject.affected,
     };
+    console.log("submit", emergencyPostObject);
     const res = await fetch("http://127.0.0.1:8000/api/messages/", {
       method: "POST",
       headers: {
