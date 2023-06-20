@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { EmergencyObject } from "../page";
+
 import EmergencyCard from "@/components/emergencyCard";
+import { EmergencyObject } from "@/pages/emergency";
 
 const emergencyObjectDummies: EmergencyObject[] = [
   {

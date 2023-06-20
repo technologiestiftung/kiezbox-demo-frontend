@@ -7,8 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { EmergencyObject } from "../pages/emergency";
+
 import { Switch } from "./ui/switch";
-import { EmergencyObject } from "@/app/page";
 
 interface EmergencyCardProps {
   emergencyObject: EmergencyObject;
