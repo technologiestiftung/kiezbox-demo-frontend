@@ -7,12 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { EmergencyObject } from "../pages/emergency";
 
 import { Switch } from "./ui/switch";
+import { EmergencyGetObject } from "@/lib/utils";
 
 interface EmergencyCardProps {
-  emergencyObject: EmergencyObject;
+  emergencyObject: EmergencyGetObject;
 }
 
 const EmergencyCard = ({ emergencyObject }: EmergencyCardProps) => {
@@ -25,13 +25,15 @@ const EmergencyCard = ({ emergencyObject }: EmergencyCardProps) => {
   return (
     <Card className={`${processed ? "" : "border-warning"} border-4 w-full`}>
       <CardHeader>
-        <CardTitle>{emergencyObject.name}</CardTitle>
-        <CardDescription>{emergencyObject.incident}</CardDescription>
+        <CardTitle>{"Name: " + emergencyObject.name}</CardTitle>
+        <CardDescription>
+          {"Problem: " + emergencyObject.problem}
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{emergencyObject.address_1}</p>
-        <p>{emergencyObject.address_2}</p>
-        <p>{emergencyObject.affected}</p>
+        <p>{"Created: " + emergencyObject.created_at}</p>
+        <p>{"Address: " + emergencyObject.address}</p>
+        <p>{"People affected: " + emergencyObject.number_affected_ppl}</p>
       </CardContent>
       <CardFooter>
         <Switch
