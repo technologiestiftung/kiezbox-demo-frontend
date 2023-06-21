@@ -7,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+// import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 
 import { Switch } from "./ui/switch";
 import { EmergencyGetObject } from "@/lib/utils";
@@ -31,7 +33,10 @@ const EmergencyCard = ({ emergencyObject }: EmergencyCardProps) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{"Created: " + emergencyObject.created_at}</p>
+        <p>
+          {"Created: " +
+            dayjs(emergencyObject.timestamp).format("DD.MM.YYYY - HH:mm")}
+        </p>
         <p>{"Address: " + emergencyObject.address}</p>
         <p>{"People affected: " + emergencyObject.number_affected_ppl}</p>
       </CardContent>

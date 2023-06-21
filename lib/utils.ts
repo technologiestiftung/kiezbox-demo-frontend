@@ -31,8 +31,7 @@ export interface EmergencyPostObject {
 
 export interface EmergencyGetObject extends EmergencyPostObject {
   id: number;
-  created_at: string;
-  updated_at: string;
+  timestamp: string;
 }
 
 export const fetchMessages = async () => {
