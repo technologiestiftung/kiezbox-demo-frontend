@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { EmergencyPostObject, emergencyCall } from "@/lib/utils";
+import { SuccessModal } from "@/components/successModal";
 
 const initialEmergencyCallObject: EmergencyPostObject = {
   address: "",
@@ -16,13 +17,20 @@ const EmergencyCallPage = () => {
   const [emergencyObject, emergencyObjectSet] = useState<EmergencyPostObject>(
     initialEmergencyCallObject
   );
+  const [modalOpen, modalOpenSet] = useState(false);
 
   const submitHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
     const send = await emergencyCall(emergencyObject);
     if (send) {
       console.log("sent");
-      emergencyObjectSet(initialEmergencyCallObject);
+      modalOpenSet(true);
     }
+  };
+
+  const resetHandler = (e: React.FormEvent) => {
+    emergencyObjectSet(initialEmergencyCallObject);
+    window.location.reload();
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +41,7 @@ const EmergencyCallPage = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <SuccessModal isopen={modalOpen} onClose={(e) => resetHandler(e)} />
       <div className="z-10 w-full max-w-3xl items-center justify-start font-mono text-sm flex flex-col gap-4">
         <h1 className="text-xl">Kiezbox Demo</h1>
         <p>Fill out this form to send an emergency call</p>
