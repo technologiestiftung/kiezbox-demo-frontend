@@ -2,14 +2,29 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Download the code:
+
+```bash
+cd kiezbox-demo-frontend
+npm install
+```
+
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+
+For production run:
+
+```bash
+npm run build
+```
+
+And run the server on:
+
+```bash
+npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
