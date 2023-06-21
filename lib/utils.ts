@@ -15,14 +15,13 @@ export const emergencyCall = async (emergencyObject: EmergencyPostObject) => {
     body: JSON.stringify(emergencyObject),
   });
   console.log(res);
-  //reset form
 };
 
 export interface EmergencyPostObject {
   name: string;
   address: string;
   problem: string;
-  number_affected_ppl: string;
+  number_affected_ppl: number;
 }
 
 export interface EmergencyGetObject extends EmergencyPostObject {

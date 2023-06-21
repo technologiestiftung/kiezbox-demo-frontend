@@ -10,7 +10,7 @@ const initialEmergencyCallObject: EmergencyPostObject = {
   address: "",
   name: "",
   problem: "",
-  number_affected_ppl: "",
+  number_affected_ppl: 0,
 };
 const EmergencyCallPage = () => {
   const [emergencyObject, emergencyObjectSet] = useState<EmergencyPostObject>(
@@ -19,17 +19,12 @@ const EmergencyCallPage = () => {
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    const emergencyPostObject: EmergencyPostObject = {
-      name: emergencyObject.name || "no name",
-      address: emergencyObject.address || "no address",
-      problem: emergencyObject.problem || "no problem",
-      number_affected_ppl: emergencyObject.number_affected_ppl || "0",
-    };
-    console.log("object to post", emergencyPostObject);
-    emergencyCall(emergencyPostObject);
+    console.log("object to post", emergencyObject);
+    emergencyCall(emergencyObject);
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const { id, value } = e.target;
     emergencyObjectSet((prev) => ({ ...prev, [id]: value }));
     //TODO: Not updating on change
@@ -80,12 +75,12 @@ const EmergencyCallPage = () => {
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
-            <Label htmlFor="number_affected-ppl">
+            <Label htmlFor="number_affected_ppl">
               <strong>Who/how many are affected</strong>
             </Label>
             <Input
               type="number"
-              id="number_affected-ppl"
+              id="number_affected_ppl"
               placeholder="Estimation of people affected"
               onChange={(e) => changeHandler(e)}
             />
