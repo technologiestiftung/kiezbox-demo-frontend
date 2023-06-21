@@ -18,16 +18,17 @@ const EmergencyCallPage = () => {
   );
 
   const submitHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("object to post", emergencyObject);
-    emergencyCall(emergencyObject);
+    const send = await emergencyCall(emergencyObject);
+    if (send) {
+      console.log("sent");
+      emergencyObjectSet(initialEmergencyCallObject);
+    }
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { id, value } = e.target;
     emergencyObjectSet((prev) => ({ ...prev, [id]: value }));
-    //TODO: Not updating on change
   };
 
   return (

@@ -15,6 +15,11 @@ export const emergencyCall = async (emergencyObject: EmergencyPostObject) => {
     body: JSON.stringify(emergencyObject),
   });
   console.log(res);
+  if (res.ok) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export interface EmergencyPostObject {
