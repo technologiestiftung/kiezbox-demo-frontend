@@ -46,7 +46,7 @@ const Page = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-3xl items-start justify-start font-mono text-sm flex flex-col gap-4">
-        <h1 className="text-xl">Emergency Ticker</h1>
+        <h1 className="text-xl">Notruf Ticker</h1>
         {messages &&
           messages
             .sort((a, b) => b.id - a.id)
