@@ -21,7 +21,6 @@ const EmergencyCard = ({ emergencyObject }: EmergencyCardProps) => {
   const [processed, processedSet] = React.useState(false);
   const onSwitch = (checked: boolean) => {
     processedSet(checked);
-    console.log("switched", checked);
   };
 
   return (

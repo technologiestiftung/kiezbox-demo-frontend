@@ -4,35 +4,52 @@ import React, { useEffect, useState } from "react";
 
 import EmergencyCard from "@/components/emergencyCard";
 import { EmergencyGetObject, fetchMessages } from "@/lib/utils";
+import Link from "next/link";
 
 const Page = () => {
   const [messages, setMessages] = useState<EmergencyGetObject[]>([]);
 
   useEffect(() => {
-    const getMessages = async () => {
-      const fetchedMessages = await fetchMessages();
+    console.log("SSE start");
+    const sse = new EventSource("http://127.0.0.1:8000/api/messages/stream", {
+      withCredentials: true,
+    });
+    const getRealtimeData = (data: any) => {
+      if (data) {
+        console.log("realtime data", data);
+        //TODO: problem with timestamp. integrate new messages here
+        // setMessages(data);
 
-      if (fetchedMessages) {
-        console.log("fetched messages", fetchedMessages);
-        setMessages(fetchedMessages);
-      } else {
-        console.log("no messages");
+        //TODO: remove old api call
+        const getMessages = async () => {
+          const fetchedMessages = await fetchMessages();
+
+          if (fetchedMessages) {
+            console.log("fetched messages", fetchedMessages);
+            setMessages(fetchedMessages);
+          } else {
+            console.log("no messages");
+          }
+        };
+        getMessages();
       }
     };
-    getMessages();
+    sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+    sse.onerror = (e) => {
+      console.log("error", e);
+      // error log here
 
-    //establish web socket
-    //fetch messages
+      sse.close();
+    };
     return () => {
-      // Clean up the WebSocket connection
-      //socket.close();
+      sse.close();
     };
   }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-3xl items-start justify-start font-mono text-sm flex flex-col gap-4">
-        <h1 className="text-xl">Emergency Ticker</h1>
+        <h1 className="text-xl">Notruf Ticker</h1>
         {messages &&
           messages
             .sort((a, b) => b.id - a.id)
@@ -40,6 +57,9 @@ const Page = () => {
               <EmergencyCard key={message.id} emergencyObject={message} />
             ))}
       </div>
+      <Link className="pt-16" href="/">
+        ← Zurück
+      </Link>
     </main>
   );
 };

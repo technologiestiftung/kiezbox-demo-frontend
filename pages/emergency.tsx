@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { EmergencyPostObject, emergencyCall } from "@/lib/utils";
 import { SuccessModal } from "@/components/successModal";
+import Link from "next/link";
 
 const initialEmergencyCallObject: EmergencyPostObject = {
   address: "",
@@ -35,7 +36,10 @@ const EmergencyCallPage = () => {
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const { id, value } = e.target;
+    let { id, value } = e.target;
+    if (id === "callerName") {
+      id = "name";
+    }
     emergencyObjectSet((prev) => ({ ...prev, [id]: value }));
   };
 
@@ -43,63 +47,66 @@ const EmergencyCallPage = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <SuccessModal isopen={modalOpen} onClose={(e) => resetHandler(e)} />
       <div className="z-10 w-full max-w-3xl items-center justify-start font-mono text-sm flex flex-col gap-4">
-        <h1 className="text-xl">Kiezbox Demo</h1>
-        <p>Fill out this form to send an emergency call</p>
+        <h1 className="text-xl">Kiezbox Notruf</h1>
+        <p>Fülle die Form aus um einen Notruf abzusetzen</p>
         <form
           className="w-full flex flex-col items-center gap-1.5"
           onSubmit={(e) => submitHandler(e)}
         >
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
-            <Label htmlFor="name">
+            <Label htmlFor="callerName">
               <strong>Name</strong>
             </Label>
             <Input
               type="text"
-              id="name"
-              placeholder="Who are you"
+              id="callerName"
+              placeholder="Wer bist du?"
               onChange={(e) => changeHandler(e)}
             />
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
             <Label htmlFor="address">
-              <strong>Address</strong>
+              <strong>Adresse</strong>
             </Label>
             <Input
               type="text"
               id="address"
-              placeholder="Where are you"
+              placeholder="Wo befindest du dich gerade?"
               onChange={(e) => changeHandler(e)}
             />
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
             <Label htmlFor="problem">
-              <strong>What happened</strong>
+              <strong>Was ist passiert?</strong>
             </Label>
             <Input
               type="text"
               id="problem"
-              placeholder="What kind of emergency"
+              placeholder="Beschreibe die Art des Notfalls"
               onChange={(e) => changeHandler(e)}
             />
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
             <Label htmlFor="number_affected_ppl">
-              <strong>Who/how many are affected</strong>
+              <strong>Wie viele Personen sind betroffen?</strong>
             </Label>
             <Input
               type="number"
               id="number_affected_ppl"
-              placeholder="Estimation of people affected"
+              placeholder=""
               onChange={(e) => changeHandler(e)}
             />
           </div>
           <Button type="submit" className="mt-4 w-full max-w-sm">
-            Send Emergency Call
+            Notruf abschicken
           </Button>
         </form>
       </div>
+      <Link className="pt-16" href="/">
+        ← Zurück
+      </Link>
     </main>
   );
 };
