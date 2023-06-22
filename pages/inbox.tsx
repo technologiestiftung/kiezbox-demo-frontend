@@ -10,39 +10,41 @@ const Page = () => {
   const [messages, setMessages] = useState<EmergencyGetObject[]>([]);
 
   useEffect(() => {
-    const getMessages = async () => {
-      const fetchedMessages = await fetchMessages();
+    console.log("SSE start");
+    const sse = new EventSource("http://127.0.0.1:8000/api/messages/stream", {
+      withCredentials: true,
+    });
+    const getRealtimeData = (data: any) => {
+      if (data) {
+        console.log("realtime data", data);
+        //TODO: problem with timestamp. integrate new messages here
+        // setMessages(data);
 
-      if (fetchedMessages) {
-        console.log("fetched messages", fetchedMessages);
-        setMessages(fetchedMessages);
-      } else {
-        console.log("no messages");
+        //TODO: remove old api call
+        const getMessages = async () => {
+          const fetchedMessages = await fetchMessages();
+
+          if (fetchedMessages) {
+            console.log("fetched messages", fetchedMessages);
+            setMessages(fetchedMessages);
+          } else {
+            console.log("no messages");
+          }
+        };
+        getMessages();
       }
     };
-    getMessages();
+    sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+    sse.onerror = (e) => {
+      console.log("error", e);
+      // error log here
+
+      sse.close();
+    };
+    return () => {
+      sse.close();
+    };
   }, []);
-
-  // useEffect(() => {
-  //   const sse = new EventSource("http://127.0.0.1:8000/inbox", {
-  //     withCredentials: true,
-  //   });
-
-  //   console.log(sse);
-  //   const getRealtimeData = (data: any) => {
-  //     console.log(data);
-  //   };
-  //   sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
-  //   sse.onerror = (e) => {
-  //     console.log("error", e);
-  //     // error log here
-
-  //     sse.close();
-  //   };
-  //   return () => {
-  //     sse.close();
-  //   };
-  // }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
