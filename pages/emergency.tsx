@@ -35,7 +35,10 @@ const EmergencyCallPage = () => {
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const { id, value } = e.target;
+    let { id, value } = e.target;
+    if (id === "callerName") {
+      id = "name";
+    }
     emergencyObjectSet((prev) => ({ ...prev, [id]: value }));
   };
 
@@ -50,12 +53,12 @@ const EmergencyCallPage = () => {
           onSubmit={(e) => submitHandler(e)}
         >
           <div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
-            <Label htmlFor="name">
+            <Label htmlFor="callerName">
               <strong>Name</strong>
             </Label>
             <Input
               type="text"
-              id="name"
+              id="callerName"
               placeholder="Who are you"
               onChange={(e) => changeHandler(e)}
             />

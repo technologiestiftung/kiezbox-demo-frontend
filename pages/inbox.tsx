@@ -22,26 +22,26 @@ const Page = () => {
     getMessages();
   }, []);
 
-  useEffect(() => {
-    const sse = new EventSource("http://127.0.0.1:8000/inbox", {
-      withCredentials: true,
-    });
+  // useEffect(() => {
+  //   const sse = new EventSource("http://127.0.0.1:8000/inbox", {
+  //     withCredentials: true,
+  //   });
 
-    console.log(sse);
-    const getRealtimeData = (data: any) => {
-      console.log(data);
-    };
-    sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
-    sse.onerror = (e) => {
-      console.log("error", e);
-      // error log here
+  //   console.log(sse);
+  //   const getRealtimeData = (data: any) => {
+  //     console.log(data);
+  //   };
+  //   sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+  //   sse.onerror = (e) => {
+  //     console.log("error", e);
+  //     // error log here
 
-      sse.close();
-    };
-    return () => {
-      sse.close();
-    };
-  }, []);
+  //     sse.close();
+  //   };
+  //   return () => {
+  //     sse.close();
+  //   };
+  // }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

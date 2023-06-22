@@ -1,13 +1,15 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+const apiUrl = "http://127.0.0.1:8000";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export const emergencyCall = async (emergencyObject: EmergencyPostObject) => {
   console.log("submit", emergencyObject);
-  const res = await fetch("http://127.0.0.1:8000/api/messages/", {
+  const res = await fetch(apiUrl + "/api/messages/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +41,7 @@ export const fetchMessages = async () => {
   const limit = 100;
   try {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/messages/?skip=${skip}&limit=${limit}`,
+      apiUrl + `/api/messages/?skip=${skip}&limit=${limit}`,
       {
         method: "GET",
         headers: {
