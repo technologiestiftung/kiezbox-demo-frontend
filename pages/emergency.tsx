@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { EmergencyPostObject, emergencyCall } from "@/lib/utils";
 import { SuccessModal } from "@/components/successModal";
+import Link from "next/link";
 
 const initialEmergencyCallObject: EmergencyPostObject = {
   address: "",
@@ -103,6 +104,9 @@ const EmergencyCallPage = () => {
           </Button>
         </form>
       </div>
+      <Link className="pt-16" href="/">
+        ← Zurück
+      </Link>
     </main>
   );
 };

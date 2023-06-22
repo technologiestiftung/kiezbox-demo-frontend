@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import EmergencyCard from "@/components/emergencyCard";
 import { EmergencyGetObject, fetchMessages } from "@/lib/utils";
+import Link from "next/link";
 
 const Page = () => {
   const [messages, setMessages] = useState<EmergencyGetObject[]>([]);
@@ -54,6 +55,9 @@ const Page = () => {
               <EmergencyCard key={message.id} emergencyObject={message} />
             ))}
       </div>
+      <Link className="pt-16" href="/">
+        ← Zurück
+      </Link>
     </main>
   );
 };

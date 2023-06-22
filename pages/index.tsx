@@ -9,12 +9,12 @@ export default function Home() {
       <p>
         <strong>Wie finde ich die Katastrophen-Leuchttürme?</strong>
         <br />
-        Im Bezirk Tempelhof Schöneberg sind die Kat-Leuchttürme am Rathaus
-        Schöneberg, Rathaus Tempelhof und am Gemeinschaftshaus Lichtenrade
-        vorgesehen. Diese Standorte sollen durch Kennzeichnung an den Gebäuden,
-        ggf. durch die Veröffentlichung einer Pressemitteilung und durch
-        Bekanntgabe auf der Internetseite des Bezirks der Bevölkerung im Vorfeld
-        bekanntgegeben werden.
+        Im Bezirk Tempelhof-Schöneberg sind die Katastrophen-Leuchttürme am
+        Rathaus Schöneberg, Rathaus Tempelhof und am Gemeinschaftshaus
+        Lichtenrade vorgesehen. Diese Standorte sollen durch Kennzeichnung an
+        den Gebäuden, ggf. durch die Veröffentlichung einer Pressemitteilung und
+        durch Bekanntgabe auf der Internetseite des Bezirks der Bevölkerung im
+        Vorfeld bekanntgegeben werden.
         <br />
         <br />
         <strong>
@@ -25,14 +25,14 @@ export default function Home() {
         ausgestattet, das Rathaus Schöneberg mit einer Laufzeit von 55 Stunden
         und das Rathaus Tempelhof mit einer Laufzeit von 120 Stunden. Für das
         Gemeinschaftshaus Lichtenrade wurde im Rahmen der Beschaffung der
-        Ausstattung für die Kat-Leuchttürme seitens der Senatsverwaltung für
-        Inneres, Digitalisierung und Sport ein mobiles Notstromaggregat
-        beschafft, das eine Laufzeit von 12 Stunden mit einer Tankfüllung
-        erzielen kann.
+        Ausstattung für die Katastrophen-Leuchttürme seitens der
+        Senatsverwaltung für Inneres, Digitalisierung und Sport ein mobiles
+        Notstromaggregat beschafft, das eine Laufzeit von 12 Stunden mit einer
+        Tankfüllung erzielen kann.
         <br />
         <br />
         <strong>
-          Was sollte ich tuen, um mich bei einem blackout möglichst lange zu
+          Was sollte ich tun, um mich bei einem blackout möglichst lange zu
           versorgen?
         </strong>
         <br />
